@@ -93,14 +93,33 @@ Both actions generate plain G-code files (`.nc`) compatible with **GRBL 1.1**:
 
 ```
 kicad2gcode/
-├── __init__.py          # Plugin entry point — registers both actions
-├── edgecuts2gcode.py    # Board cutting action and options dialog
-├── drill2gcode.py       # Drilling action and options dialog
-├── gcode_common.py      # Geometry, board reading, and G-code generation
-├── icon_cut.png         # Toolbar icon for board cutting
-├── icon_drill.png       # Toolbar icon for drilling
-└── metadata.json        # KiCad Plugin & Content Manager metadata
+├── plugins/
+│   ├── __init__.py          # Plugin entry point — registers both actions
+│   ├── edgecuts2gcode.py    # Board cutting action and options dialog
+│   ├── drill2gcode.py       # Drilling action and options dialog
+│   ├── gcode_common.py      # Geometry, board reading, and G-code generation
+│   ├── icon_cut.png         # Toolbar icon for board cutting (24×24)
+│   └── icon_drill.png       # Toolbar icon for drilling (24×24)
+├── resources/
+│   └── icon.png             # PCM display icon (64×64)
+├── metadata.json            # KiCad Plugin & Content Manager metadata
+└── kicad2gcode.zip          # Release archive (plugins/ + resources/ + metadata.json)
 ```
+
+## Publishing a new release
+
+1. Add or update `resources/icon.png` (64×64 px) if the icon changed.
+2. Recreate the release archive (PowerShell):
+   ```powershell
+   Remove-Item kicad2gcode.zip -ErrorAction SilentlyContinue
+   Compress-Archive -Path plugins, resources, metadata.json -DestinationPath kicad2gcode.zip
+   (Get-FileHash kicad2gcode.zip -Algorithm SHA256).Hash.ToLower()
+   (Get-Item kicad2gcode.zip).Length
+   (Get-ChildItem plugins, resources -Recurse -File | Measure-Object -Property Length -Sum).Sum
+   ```
+3. Update `metadata.json` with the new `version`, `download_url`, `download_sha256`, `download_size`, and `install_size`.
+4. Create a GitHub Release tagged `v<version>` and attach `kicad2gcode.zip` as an asset.
+5. Submit a merge request to [gitlab.com/kicad/addons/metadata](https://gitlab.com/kicad/addons/metadata) adding/updating `packages/com.github.andresarmento.kicad2gcode/metadata.json`.
 
 ## License
 
