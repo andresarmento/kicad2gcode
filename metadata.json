@@ -1,0 +1,25 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v1",
+  "name": "Kicad2Gcode",
+  "description": "Generate GRBL 1.1 G-code for board cutting and drilling directly from the PCB editor.",
+  "description_full": "Two-button action plugin: one generates G-code to mill the board outline (Edge Cuts layer), the other generates G-code to drill through-hole pads. No Gerber or Excellon export needed. Features: multiple Z passes, retention tabs, internal cutouts, nearest-neighbour drill path optimisation. Uses KiCad's built-in polygon engine — no external dependencies.",
+  "identifier": "com.github.andresarmento.kicad2gcode",
+  "type": "plugin",
+  "author": {
+    "name": "André Sarmento",
+    "contact": {
+      "email": "diybrasil@gmail.com"
+    }
+  },
+  "license": "MIT",
+  "resources": {
+    "homepage": "https://github.com/andresarmento/kicad2gcode"
+  },
+  "versions": [
+    {
+      "version": "1.0.0",
+      "status": "stable",
+      "kicad_version": "6.0"
+    }
+  ]
+}
