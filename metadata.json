@@ -21,7 +21,10 @@
       "status": "stable",
       "kicad_version": "6.0",
       "download_url": "https://github.com/andresarmento/kicad2gcode/releases/download/v1.0.0/kicad2gcode.zip",
-      "download_size": 31315
+      "download_size": 23913,
+	  "install_size": 39808,
+	  "download_sha256": "6249078f848e934ce0bb717cd7d3b65d00e6a0afb63988f30ec5f0e3288025c4"
+	  
     }
   ]
 }
